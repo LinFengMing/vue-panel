@@ -1,13 +1,17 @@
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import path from 'path'
+import Vue from '@vitejs/plugin-vue'
+import Pages from 'vite-plugin-pages'
+import Path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
+      '@': Path.resolve(__dirname, 'src'),
     },
   },
-  plugins: [vue()],
+  plugins: [
+    Vue(),
+    Pages(),
+  ],
 })
