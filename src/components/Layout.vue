@@ -1,6 +1,6 @@
 <script>
 import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import HeroiconsOutlineHome from '~icons/heroicons-outline/home'
 import HeroiconsOutlineDocumentText from '~icons/heroicons-outline/document-text'
 import HeroiconsOutlineUser from '~icons/heroicons-outline/user'
@@ -13,7 +13,9 @@ export default {
   },
   setup() {
     const route = useRoute()
+    const router = useRouter()
     const showMenu = ref(false)
+
     const toggleMenu = () => {
       showMenu.value = !showMenu.value
     }
@@ -24,6 +26,18 @@ export default {
       { to: '/setting', text: '個人資料', icon: 'heroicons-outline-user' },
     ]
 
+    const userMenuItems = [
+      { tag: 'RouterLink', to: '/setting', text: '個人資料' },
+      {
+        tag: 'button',
+        text: '登出',
+        mobile: true,
+        onclick: () => {
+          router.push('/login')
+        }
+      },
+    ]
+
     const activeItem = computed(() =>
       [...menuItems]
         .reverse()
@@ -32,7 +46,7 @@ export default {
 
     const isActive = (to) => to === activeItem.value.to
 
-    return { showMenu, toggleMenu, menuItems, isActive }
+    return { showMenu, toggleMenu, menuItems, userMenuItems, isActive }
   }
 }
 </script>
@@ -61,7 +75,7 @@ export default {
           <li v-for="item in menuItems" :key="item.to">
             <RouterLink
               :to="item.to"
-              class="flex items-center px-5 py-4"
+              class="flex items-center px-4 py-3 sm:px-5"
               :class="isActive(item.to) ? 'text-white' : 'text-violet-400 hover:text-white'"
             >
               <component :is="item.icon" class="w-5 h-5 mr-2" />
@@ -78,6 +92,19 @@ export default {
             />
             <div class="font-medium tracking-wide">Jiro</div>
           </div>
+
+          <ul>
+            <template v-for="item in userMenuItems" :key="item.text">
+              <li v-if="item.mobile">
+                <component
+                  :is="item.tag"
+                  :to="item.to"
+                  class="flex items-center w-full px-4 py-3 text-violet-400 hover:text-white"
+                  @click="item.onclick"
+                >{{ item.text }}</component>
+              </li>
+            </template>
+          </ul>
         </div>
         <!-- 用戶名稱 電腦版 -->
         <div
@@ -91,11 +118,30 @@ export default {
             <div class="font-medium tracking-wide">Jiro</div>
           </div>
 
-          <button
-            class="flex justify-center items-center w-7 h-7 hover:bg-violet-400 rounded transition-colors duration-100"
-          >
-            <heroicons-outline-dots-vertical class="w-4 h-4" />
-          </button>
+          <Menu as="div" class="relative">
+            <MenuButton
+              class="flex justify-center items-center w-7 h-7 hover:bg-violet-400 rounded transition-colors duration-100"
+              type="button"
+            >
+              <heroicons-outline-dots-vertical class="w-4 h-4" />
+            </MenuButton>
+
+            <TransitionZoom>
+              <MenuItems
+                class="absolute flex flex-col left-full bottom-0 ml-2 w-32 bg-white rounded-md shadow-lg overflow-hidden origin-bottom-left"
+              >
+                <MenuItem v-slot="{ active }" v-for="item in userMenuItems" :key="item.text">
+                  <component
+                    :is="item.tag"
+                    :to="item.to"
+                    class="px-3 py-2 text-gray-700 text-left text-base font-normal"
+                    :class="active ? 'bg-gray-100' : ''"
+                    @click="item.onclick"
+                  >{{ item.text }}</component>
+                </MenuItem>
+              </MenuItems>
+            </TransitionZoom>
+          </Menu>
         </div>
       </div>
     </div>
