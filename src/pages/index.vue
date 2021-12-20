@@ -2,18 +2,21 @@
   <Layout>
     <div class="p-4 space-y-4">
       <div class="space-x-4">
-        <PrimaryButton disabled>主要按鈕</PrimaryButton>
-        <PrimaryButton to="/">主要按鈕</PrimaryButton>
+        <input type="text" class="form-input" />
       </div>
 
       <div class="space-x-4">
-        <SecondaryButton disabled>次要按鈕</SecondaryButton>
-        <SecondaryButton to="/setting">次要按鈕</SecondaryButton>
+        <textarea class="form-textarea"></textarea>
       </div>
 
       <div class="space-x-4">
-        <DangerButton disabled>刪除帳號</DangerButton>
-        <DangerButton to="/login">刪除帳號</DangerButton>
+        <label>
+          <input type="checkbox" class="form-checkbox" />多選框
+        </label>
+
+        <label>
+          <input type="radio" class="form-radio" />單選框
+        </label>
       </div>
     </div>
   </Layout>
