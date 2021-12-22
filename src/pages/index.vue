@@ -15,15 +15,7 @@ export default {
     <div class="p-4">
       <PrimaryButton @click="showModal = true">開啟視窗</PrimaryButton>
 
-      <Modal v-model="showModal">
-        <template #title>我是標題</template>
-
-        <template #content>
-          <div
-            class="mt6"
-          >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iusto, suscipit.</div>
-        </template>
-      </Modal>
+      <ConfirmModal v-model="showModal" title="確定要刪除文章嗎?" @success="success" @cancel="cancel" />
     </div>
   </Layout>
 </template>
