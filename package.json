@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@headlessui/vue": "^1.4.2",
-    "@iconify/json": "^1.1.446",
+    "@iconify/json": "^1.1.448",
     "@kyvg/vue3-notification": "^2.3.4",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.4.0",
@@ -26,7 +26,7 @@
     "tailwindcss": "^3.0.7",
     "unplugin-icons": "^0.12.23",
     "unplugin-vue-components": "^0.17.9",
-    "vite": "^2.7.6",
-    "vite-plugin-pages": "^0.19.6"
+    "vite": "^2.7.7",
+    "vite-plugin-pages": "^0.19.7"
   }
 }
