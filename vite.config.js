@@ -27,7 +27,9 @@ export default defineConfig({
           prefix: false,
           enabledCollections: ['heroicons-outline'],
         }),
-        HeadlessUiResolver(),
+        HeadlessUiResolver({
+          prefix: "",
+        }),
       ]
     }),
     Icons(),
