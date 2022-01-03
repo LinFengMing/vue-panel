@@ -14,6 +14,10 @@ export default {
       type: String,
       default: '當前沒有任何資料',
     },
+    confirmDeleteText: {
+      type: String,
+      default: '確定要執行刪除嗎?',
+    },
   },
   setup(props) {
     const columnsCount = computed(() => {
@@ -63,18 +67,7 @@ export default {
           </td>
 
           <td class="px-5 py-3 text-gray-600 whitespace-nowrap">
-            <RouterLink
-              to="/posts/1"
-              class="inline-flex justify-center items-center w-8 h-8 text-gray-400 hover:text-violet-600 transition-colors"
-            >
-              <heroicons-outline-pencil-alt />
-            </RouterLink>
-            <button
-              type="button"
-              class="inline-flex justify-center items-center w-8 h-8 text-gray-400 hover:text-red-600 transition-colors"
-            >
-              <heroicons-outline-trash />
-            </button>
+            <slot name="actions" :record="record" :confirmDeleteText="confirmDeleteText"></slot>
           </td>
         </tr>
 

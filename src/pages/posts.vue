@@ -38,7 +38,12 @@ export default {
       },
     ])
 
-    return { columns, data }
+    const handleDeletePost = (record) => {
+      // 刪除單一文章
+      console.log(record);
+    }
+
+    return { columns, data, handleDeletePost }
   }
 }
 </script>
@@ -69,6 +74,14 @@ export default {
               :key="tag"
             >{{ tag }}</span>
           </span>
+        </template>
+        <template #actions="{ record, confirmDeleteText }">
+          <EditAction :to="`/posts/${record.id}`" />
+          <DeleteAction
+            :record="record"
+            :confirm-text="confirmDeleteText"
+            @delete="handleDeletePost"
+          />
         </template>
       </Table>
     </Card>
