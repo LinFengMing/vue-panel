@@ -1,3 +1,11 @@
+<template>
+  <Layout>
+    <div class="p-4">
+      <PrimaryButton @click="open">顯示通知</PrimaryButton>
+    </div>
+  </Layout>
+</template>
+
 <script>
 import { warningNotify } from '@/composables/useNotification';
 
@@ -11,11 +19,3 @@ export default {
   },
 }
 </script>
-
-<template>
-  <Layout>
-    <div class="p-4">
-      <PrimaryButton @click="open">顯示通知</PrimaryButton>
-    </div>
-  </Layout>
-</template>

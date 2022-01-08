@@ -1,34 +1,3 @@
-<script>import { computed } from 'vue'
-
-export default {
-  props: {
-    columns: {
-      type: Array,
-      required: true,
-    },
-    data: {
-      type: Array,
-      required: true,
-    },
-    emptyText: {
-      type: String,
-      default: '當前沒有任何資料',
-    },
-    confirmDeleteText: {
-      type: String,
-      default: '確定要執行刪除嗎?',
-    },
-  },
-  setup(props) {
-    const columnsCount = computed(() => {
-      return props.columns.length + 2
-    })
-
-    return { columnsCount }
-  },
-}
-</script>
-
 <template>
   <div class="overflow-x-auto">
     <table class="w-full">
@@ -77,4 +46,40 @@ export default {
       </tbody>
     </table>
   </div>
+
+  <Paginator v-model:current-page="currentPage" :total-page="totalPage" />
 </template>
+
+<script>import { ref, computed } from 'vue'
+
+export default {
+  props: {
+    columns: {
+      type: Array,
+      required: true,
+    },
+    data: {
+      type: Array,
+      required: true,
+    },
+    emptyText: {
+      type: String,
+      default: '當前沒有任何資料',
+    },
+    confirmDeleteText: {
+      type: String,
+      default: '確定要執行刪除嗎?',
+    },
+  },
+  setup(props) {
+    const columnsCount = computed(() => {
+      return props.columns.length + 2
+    })
+
+    const currentPage = ref(1)
+    const totalPage = ref(10)
+
+    return { columnsCount, currentPage, totalPage }
+  },
+}
+</script>

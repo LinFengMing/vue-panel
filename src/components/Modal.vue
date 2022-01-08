@@ -1,38 +1,3 @@
-<script>
-import { useVModel } from '@vueuse/core'
-
-export default {
-  emits: ['update:modelValue', 'success', 'cancel'],
-  props: {
-    modelValue: Boolean,
-    title: String,
-  },
-  setup(props, { emit }) {
-    const isOpen = useVModel(props)
-
-    const openModal = () => {
-      isOpen.value = true
-    }
-
-    const closeModal = () => {
-      isOpen.value = false
-    }
-
-    const handleSuccess = () => {
-      emit('success')
-      closeModal()
-    }
-
-    const handleCancel = () => {
-      emit('cancel')
-      closeModal
-    }
-
-    return { isOpen, openModal, closeModal, handleSuccess, handleCancel }
-  },
-}
-</script>
-
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
     <Dialog as="div" @close="handleCancel">
@@ -89,3 +54,38 @@ export default {
     </Dialog>
   </TransitionRoot>
 </template>
+
+<script>
+import { useVModel } from '@vueuse/core'
+
+export default {
+  emits: ['update:modelValue', 'success', 'cancel'],
+  props: {
+    modelValue: Boolean,
+    title: String,
+  },
+  setup(props, { emit }) {
+    const isOpen = useVModel(props)
+
+    const openModal = () => {
+      isOpen.value = true
+    }
+
+    const closeModal = () => {
+      isOpen.value = false
+    }
+
+    const handleSuccess = () => {
+      emit('success')
+      closeModal()
+    }
+
+    const handleCancel = () => {
+      emit('cancel')
+      closeModal
+    }
+
+    return { isOpen, openModal, closeModal, handleSuccess, handleCancel }
+  },
+}
+</script>

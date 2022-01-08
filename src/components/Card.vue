@@ -1,11 +1,3 @@
-<script>
-export default {
-  props: {
-    stretch: Boolean,
-  }
-}
-</script>
-
 <template>
   <div
     class="relative bg-white border-gray-200 shadow"
@@ -14,3 +6,11 @@ export default {
     <slot></slot>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    stretch: Boolean,
+  }
+}
+</script>

@@ -1,3 +1,14 @@
+<template>
+  <component
+    :is="tag"
+    :type="buttonType"
+    :to="to"
+    class="btn text-white bg-violet-500 hover:bg-violet-600 focus:ring-violet-500 disabled:bg-violet-400"
+  >
+    <slot></slot>
+  </component>
+</template>
+
 <script>
 import useButton from '@/composables/useButton'
 
@@ -12,14 +23,3 @@ export default {
   },
 }
 </script>
-
-<template>
-  <component
-    :is="tag"
-    :type="buttonType"
-    :to="to"
-    class="btn text-white bg-violet-500 hover:bg-violet-600 focus:ring-violet-500 disabled:bg-violet-400"
-  >
-    <slot></slot>
-  </component>
-</template>
