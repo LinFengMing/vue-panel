@@ -4,7 +4,7 @@
       <thead>
         <tr class="border-b border-gray-200">
           <th class="pl-5 py-3 text-left">
-            <input type="checkbox" class="form-checkbox" />
+            <SelectAllCheckbox v-model:state="selectAllState" />
           </th>
 
           <th
@@ -17,9 +17,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="record in data" :key="record.id">
+        <tr
+          v-for="(record, i) in data"
+          :key="record.id"
+          :class="{ 'bg-violet-50': rowSelectStatus[i] }"
+        >
           <td class="pl-5 py-3">
-            <input type="checkbox" class="form-checkbox" />
+            <SelectRowCheckbox v-model:state="rowSelectStatus[i]" />
           </td>
 
           <td
@@ -76,10 +80,13 @@ export default {
       return props.columns.length + 2
     })
 
+    const selectAllState = ref('none')
+    const rowSelectStatus = ref(props.data.map(_ => false))
+
     const currentPage = ref(1)
     const totalPage = ref(10)
 
-    return { columnsCount, currentPage, totalPage }
+    return { columnsCount, selectAllState, rowSelectStatus, currentPage, totalPage }
   },
 }
 </script>
